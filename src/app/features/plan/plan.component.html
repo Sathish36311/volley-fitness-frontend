@@ -1,0 +1,75 @@
+<div class="card">
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;">
+    <div>
+      <h2>Today's Plan</h2>
+      <p style="color:var(--muted);">Your AI-generated volleyball workout and diet plan.</p>
+    </div>
+    <button class="btn" (click)="generate()" [disabled]="isLoading">
+      <span *ngIf="!isLoading">Generate Plan</span>
+      <span *ngIf="isLoading" class="spinner"></span>
+    </button>
+  </div>
+
+  <div *ngIf="error" class="banner" style="margin-top:12px;">{{ error }}</div>
+
+  <div *ngIf="plan; else emptyState" style="margin-top:20px;display:grid;gap:20px;">
+    <section class="card" style="border:none;box-shadow:none;padding:0;">
+      <h3>Workout</h3>
+      <div style="display:grid;gap:16px;">
+        <div *ngFor="let session of plan.workoutPlan" class="card" style="border:1px solid var(--border);">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <div>
+              <strong>{{ session.sessionName }}</strong>
+              <div style="color:var(--muted);">{{ session.focusArea }}</div>
+            </div>
+          </div>
+
+          <div style="display:grid;gap:12px;margin-top:12px;">
+            <div *ngFor="let ex of session.exercises" class="card" style="border:1px solid var(--border);padding:12px;display:flex;align-items:center;justify-content:space-between;gap:16px;">
+              <div>
+                <div style="font-weight:600;">{{ ex.name }}</div>
+                <div style="color:var(--muted);">{{ ex.sets }} sets · {{ ex.reps }} reps · Rest {{ ex.rest }}</div>
+              </div>
+              <button class="btn ghost" type="button" (click)="openPreview(ex.name, ex.imageUrl)">Preview</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div *ngIf="previewUrl" class="modal-backdrop" (click)="closePreview()">
+      <div class="modal-card" (click)="$event.stopPropagation()">
+        <button class="modal-close" type="button" (click)="closePreview()">×</button>
+        <div style="margin-bottom:12px;">
+          <strong>Exercise Preview</strong>
+          <div style="color:var(--muted);">{{ previewName }}</div>
+        </div>
+        <img
+          [src]="previewUrl"
+          (error)="setFallback($event)"
+          alt="Exercise preview"
+          style="width:100%;border-radius:16px;border:1px solid var(--border);"
+        />
+      </div>
+    </div>
+
+    <section class="card" style="border:none;box-shadow:none;padding:0;">
+      <h3>Diet</h3>
+      <div class="card" style="border:1px solid var(--border);">
+        <p style="margin-top:0;color:var(--muted);">
+          Calories: {{ plan.dietPlan.totalCalories }} kcal · Protein: {{ plan.dietPlan.protein }}g · Carbs: {{ plan.dietPlan.carbs }}g · Fats: {{ plan.dietPlan.fats }}g
+        </p>
+        <div style="display:grid;gap:12px;">
+          <div *ngFor="let meal of plan.dietPlan.meals">
+            <strong>{{ meal.mealName }}</strong>
+            <div style="color:var(--muted);">{{ meal.items.join(', ') }}</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <ng-template #emptyState>
+    <p style="color:var(--muted);margin-top:16px;">No plan generated today. Complete your profile and generate one.</p>
+  </ng-template>
+</div>

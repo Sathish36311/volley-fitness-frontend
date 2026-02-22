@@ -1,0 +1,36 @@
+<section class="card" style="display:grid;gap:20px;">
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;">
+    <div>
+      <h2>Performance Dashboard</h2>
+      <p style="color:var(--muted);">Build your daily plan, track sessions, and fuel recovery.</p>
+    </div>
+    <a class="btn" routerLink="/plan">Open Today\'s Plan</a>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;">
+    <div class="card" style="border:1px solid var(--border);">
+      <div style="font-size:12px;color:var(--muted);">Profile Status</div>
+      <div style="font-size:20px;font-weight:700;">{{ profileComplete ? 'Complete' : 'Incomplete' }}</div>
+      <p style="margin:8px 0 0;color:var(--muted);">Update your profile to unlock AI plans.</p>
+      <a class="btn ghost" routerLink="/profile" style="margin-top:12px;display:inline-block;">Edit Profile</a>
+    </div>
+    <div class="card" style="border:1px solid var(--border);">
+      <div style="font-size:12px;color:var(--muted);">Workout Focus</div>
+      <div style="font-size:20px;font-weight:700;">Explosive Power</div>
+      <p style="margin:8px 0 0;color:var(--muted);">Jump, speed, and lateral movement sessions.</p>
+    </div>
+    <div class="card" style="border:1px solid var(--border);">
+      <div style="font-size:12px;color:var(--muted);">Nutrition Goal</div>
+      <div style="font-size:20px;font-weight:700;">Balanced Fuel</div>
+      <p style="margin:8px 0 0;color:var(--muted);">Macro splits to support recovery.</p>
+    </div>
+  </div>
+
+  <div class="card" style="border:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:12px;">
+    <div>
+      <strong>Ready for today\'s plan?</strong>
+      <div style="color:var(--muted);">Generate a new plan once per day after profile completion.</div>
+    </div>
+    <a class="btn secondary" routerLink="/plan">Generate Plan</a>
+  </div>
+</section>

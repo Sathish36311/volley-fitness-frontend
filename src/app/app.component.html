@@ -1,0 +1,30 @@
+<div class="app-shell">
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark">VF</div>
+      <div>
+        <div class="brand-title">Volley Fitness</div>
+        <div class="brand-sub">AI-powered volleyball performance plans</div>
+      </div>
+    </div>
+    <nav class="topbar-nav">
+      <a class="nav-link" routerLink="/dashboard">Dashboard</a>
+      <a class="nav-link" routerLink="/plan">Plan</a>
+      <a class="nav-link" routerLink="/profile">Profile</a>
+      <ng-container *ngIf="!isLoggedIn">
+        <a class="btn ghost" routerLink="/login">Login</a>
+        <a class="btn secondary" routerLink="/register">Register</a>
+      </ng-container>
+      <ng-container *ngIf="isLoggedIn">
+        <div class="user-chip">
+          <div class="user-icon">{{ userInitial }}</div>
+          <span>Member</span>
+        </div>
+        <button class="btn ghost" (click)="logout()">Logout</button>
+      </ng-container>
+    </nav>
+  </header>
+  <main class="container">
+    <router-outlet></router-outlet>
+  </main>
+</div>

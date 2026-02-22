@@ -1,0 +1,42 @@
+<div class="card">
+  <h2>Profile</h2>
+  <p style="color:var(--muted);">Complete your profile to unlock AI plans.</p>
+
+  <div *ngIf="message" class="banner" style="background:#e7ffe7;border-color:#9be49b;color:#1f5b1f;">
+    {{ message }}
+  </div>
+  <div *ngIf="error" class="banner" style="margin-top:12px;">{{ error }}</div>
+
+  <form [formGroup]="form" (ngSubmit)="save()" style="display:grid;gap:12px;margin-top:12px;">
+    <label>
+      Age
+      <input class="input" type="number" formControlName="age" />
+    </label>
+    <label>
+      Height (cm)
+      <input class="input" type="number" formControlName="height" />
+    </label>
+    <label>
+      Weight (kg)
+      <input class="input" type="number" formControlName="weight" />
+    </label>
+    <label>
+      Gender
+      <input class="input" type="text" formControlName="gender" />
+    </label>
+    <label>
+      Goal
+      <input class="input" type="text" formControlName="goal" />
+    </label>
+    <label>
+      Skill Level
+      <input class="input" type="text" formControlName="skillLevel" />
+    </label>
+    <label>
+      Position
+      <input class="input" type="text" formControlName="position" />
+    </label>
+
+    <button class="btn" type="submit">Save Profile</button>
+  </form>
+</div>

@@ -1,0 +1,27 @@
+<div class="card" style="max-width:520px;margin:0 auto;">
+  <h2>Create Account</h2>
+  <p style="color:var(--muted);">Join to receive your daily volleyball plan.</p>
+
+  <div *ngIf="error" class="banner" style="margin-bottom:12px;">{{ error }}</div>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" style="display:grid;gap:12px;">
+    <label>
+      Email
+      <input class="input" type="email" formControlName="email" />
+    </label>
+    <label>
+      Password
+      <input class="input" type="password" formControlName="password" />
+    </label>
+
+    <button class="btn secondary" type="submit" [disabled]="isSubmitting">
+      <span *ngIf="!isSubmitting">Register</span>
+      <span *ngIf="isSubmitting" class="spinner"></span>
+    </button>
+  </form>
+
+  <p style="margin-top:16px;">
+    Already have an account?
+    <a routerLink="/login" style="color:var(--accent);">Login</a>
+  </p>
+</div>
